@@ -1,0 +1,3 @@
+<% form_for :role, :url => { :action => :create }, :html => {:method => :put} do | form | %>
+	<p><label><%= form.text_field :role_name %></label><%= submit_tag "Add Role" %></p>
+<% end %>

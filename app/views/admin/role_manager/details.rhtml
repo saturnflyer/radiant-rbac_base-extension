@@ -1,0 +1,16 @@
+<%= javascript_include_tag "rbac/admin/role_details.js"  %>
+<h1>Role Details</h1>
+<script language="javascript">var role_id = <%= @role.id %>;</script>
+
+<h2><%= @role.role_name %> Users <%= role_spinner 'taken' %></h2>
+<ul id="taken_users" multiple="multiple" class="UserList">
+</ul>
+
+<h2>Available Users <%= role_spinner 'available' %></h2>
+<ul id="available_users" multiple="multiple" class="UserList">
+	
+</ul>
+
+<%= link_to "RBAC Home", rbac_path() %>
+<% include_stylesheet 'rbac/rbac' %>
+<% include_javascript 'dragdrop' %>

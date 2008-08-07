@@ -1,0 +1,31 @@
+= RBAC (Role Based Access Control) Base
+
+This extension is used by authors of other extensions to hide those 
+extensions from users based on admin defined groups. Standard Radiant
+groups consist of admin, developer and users. This adds the ability
+to create groups such as finance.
+
+Installing:
+Run 'rake radiant:extensions:rbac_base:migrate'
+
+Installing the public files:
+Run 'rake radiant:extensions:rbac_base:update'
+
+To check the current users roles in your extensions simply do 
+something similar to:
+  current_user.roles.each do |role|
+    ...perform your operations...
+  end
+
+RBAC Base adds a roles table, a roles_users table, and creates 
+the has_and_belongs_to_many relationship between users and roles.
+
+In the future we may be adding:
+
+* A way to register extensions to prevent role deletion
+* A way to automatically add roles for registered extensions
+* Tests
+
+It does not (yet) provide a way to set the :visibility of a 'tab' in the admin area of Radiant.
+
+Built by Saturn Flyer http://www.saturnflyer.com

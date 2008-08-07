@@ -1,0 +1,19 @@
+<h1>Role Management</h1>
+<p>Use this screen to manage your user roles.</p>
+<p><strong>Caution:</strong> Roles are defined as a security mechanism
+	for the extensions that are restricted by user role.  User roles are 
+	normally added by these extensions at installation time.  Adding or
+	removing roles may cause problems with the role based security.  
+	<strong>Only use this feature if you absolutely must.</strong></p>
+<h2>Roles</h2>
+<ul id="role_list">
+<% unless @roles.empty? %>
+<% @roles.each do | role | %>
+	<li><%= link_to role.role_name, :action => :details, :id => role.id %> (<%= role.users.count %>) <span class="remover"><%= link_to image('remove', :alt => 'remove role'), {:action => :destroy, :id => role.id}, :confirm => "Are you sure?" %></span></li>
+<% end %>
+<% else %>
+	<li class="none">No Roles yet created.</li>
+<% end %>
+</ul>
+<%= render :partial => 'add_role_form' %>
+<% include_stylesheet 'rbac/rbac' %>
