@@ -126,7 +126,7 @@ RoleManager.prototype.loadData = function(role_id) {
 				spinners.show();
 			},
 			onFailure: function(transport) {
-				alert(transport.responseText);
+				alert('There was a problem with the script');
 				spinners.hide();
 			},
 			onSuccess: function(transport) {
