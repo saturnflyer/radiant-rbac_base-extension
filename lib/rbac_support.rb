@@ -10,7 +10,7 @@ module RbacSupport
           @my_roles["#{role.role_name.underscore}"] = true
         end
       end
-      @my_roles["#{possible_role.role_name.underscore}"] || admin?
+      @my_roles["#{possible_role.role_name.underscore}"] || self[:admin] == true
     end
   end
 end

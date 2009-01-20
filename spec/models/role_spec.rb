@@ -9,8 +9,21 @@ describe Role do
     }.should raise_error(ActiveRecord::RecordInvalid, /has already been taken/)
   end
   
-  it "should err when saved with a standard Radiant Role name" do
-    lambda { Role.new(:role_name => 'admin').save! }.should raise_error(ActiveRecord::RecordInvalid,/may not be any of: admin, developer/)
+  it "should not err when saved with a standard Radiant Role name" do
+    lambda { Role.new(:role_name => 'admin').save! }.should_not raise_error(ActiveRecord::RecordInvalid,/may not be any of: admin, developer/)
+  end
+  
+  describe 'Role::RADIANT_STANDARDS' do
+    it "should be an array of 'admin' and 'developer'" do
+      Role::RADIANT_STANDARDS.should == ['admin','developer']
+    end
+  end
+  
+  it "should err when destroying a Radiant standard role" do
+    Role::RADIANT_STANDARDS.each do |role|
+      Role.create!(:role_name => role)
+      lambda { Role.find_by_role_name(role).destroy }.should raise_error(Role::ProtectedRoleError, /is a protected role and may not be removed/)
+    end
   end
   
   describe 'users' do

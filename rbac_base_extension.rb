@@ -18,6 +18,7 @@ class RbacBaseExtension < Radiant::Extension
       admin.tabs.add "Roles", "/admin/rbac", :after => "Layouts", :visibility => [:admin]
       User.send :has_and_belongs_to_many, :roles
       User.send :include, RbacSupport
+      admin.user.edit[:form].delete('edit_roles')
     end
   end
   

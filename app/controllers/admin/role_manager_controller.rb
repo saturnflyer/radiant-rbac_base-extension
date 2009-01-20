@@ -2,6 +2,7 @@ class Admin::RoleManagerController < ApplicationController
   # Remove this line if your controller should only be accessible to users
   # that are logged in:
   # no_login_required
+  skip_before_filter :verify_authenticity_token
   
   before_filter :check_admin_role
   before_filter :load_roles, :only => [:index, :new, :create]
@@ -88,8 +89,7 @@ class Admin::RoleManagerController < ApplicationController
     if request.xhr?
       role = Role.find(params[:id])
       
-      available_users = User.find_by_sql ["SELECT * FROM users WHERE admin = 0 and id NOT IN (SELECT user_id FROM roles_users WHERE role_id = ?)",
-        role.id]
+      available_users = User.find(:all, :conditions => ['id NOT IN (SELECT user_id FROM roles_users WHERE role_id = ?)', role.id])
       taken_users = role.users
       
       result = Hash.new
