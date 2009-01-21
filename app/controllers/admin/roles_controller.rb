@@ -42,9 +42,7 @@ class Admin::RolesController < ApplicationController
     available_users = User.find(:all, :conditions => ['id NOT IN (SELECT user_id FROM roles_users WHERE role_id = ?)', role.id])
     taken_users = role.users
     
-    result = Hash.new
-    result[:available] = Array.new 
-    result[:taken] = Array.new 
+    result = {:available => [], :taken => []}
     
     available_users.each do | usr |
       result[:available] << [usr.id, usr.name]

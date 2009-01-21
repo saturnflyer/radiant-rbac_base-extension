@@ -14,5 +14,5 @@
         %span.remover= link_to image('remove', :alt => 'remove role'), admin_role_path(role), :confirm => "Are you sure?"
   - else
     %li.none No Roles yet created.
-- render :partial => 'add_role_form'
+= render :partial => 'add_role_form'
 - include_stylesheet 'rbac/rbac'
