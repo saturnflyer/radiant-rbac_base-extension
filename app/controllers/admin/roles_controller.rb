@@ -60,14 +60,10 @@ class Admin::RolesController < ApplicationController
   end
   
   def add_user
-    user_id = params[:id]
-    role_id = params[:role_id]
-    debugger
-    role = Role.find(role_id)
-    user = User.find(user_id)
+    role = Role.find(params[:role_id])
+    user = User.find(params[:id])
     
-    role.users << user
-    if role.save
+    if role.users << user
       render :json => {:status => "Ok", :role_id => role.id, :user_id => user.id }.to_json
     else
       render :json => {:status => "Error", :user_id => user.id }.to_json
@@ -75,14 +71,10 @@ class Admin::RolesController < ApplicationController
   end
   
   def remove_user 
-    user_id = params[:id]
-    role_id = params[:role_id]
+    role = Role.find(params[:role_id])
+    user = User.find(params[:id])
     
-    role = Role.find(role_id)
-    user = User.find(user_id)
-    
-    role.users.delete(user)
-    if role.save
+    if role.users.delete(user)
       render :json => {:status => "Ok", :role_id => role.id, :user_id => user.id }.to_json
     else
       render :json => {:status => "Error", :user_id => user.id }.to_json
