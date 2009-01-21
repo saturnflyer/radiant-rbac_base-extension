@@ -21,7 +21,7 @@ class Admin::RolesController < ApplicationController
   def create
     @role = Role.new(params[:role])
     @role.save!
-    redirect_to :action => :index
+    redirect_to admin_roles_path
   rescue ActiveRecord::RecordInvalid => invalid
     flash[:error] = invalid.record.errors.full_messages
     render :action => :index

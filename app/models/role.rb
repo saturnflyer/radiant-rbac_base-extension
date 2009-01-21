@@ -2,6 +2,8 @@ class Role < ActiveRecord::Base
   has_and_belongs_to_many :users
   validates_uniqueness_of :role_name
   
+  order_by :role_name
+  
   class ProtectedRoleError < StandardError; end
   
   before_destroy :verify_non_standard
