@@ -46,12 +46,10 @@ RoleManager.prototype.updateData = function(data) {
 	this.taken = data.taken;
 }
 
-RoleManager.prototype.addToRole = function(element) {
-	new Ajax.Request("/admin/rbac/add_user_to_role", {
-		parameters: {
-			user_id: element.readAttribute("value"),
-			role_id: role_id
-		},
+RoleManager.prototype.addUser = function(element) {
+  user_id = element.readAttribute("value");
+	new Ajax.Request("/admin/roles/"+role_id+"/users/"+user_id, {
+	  method: 'post',
 		onCreate: function(){
 			spinners.show();
 		},
@@ -83,12 +81,10 @@ RoleManager.prototype.addToRole = function(element) {
 	});
 }
 
-RoleManager.prototype.removeFromRole = function(element) {
-	new Ajax.Request("/admin/rbac/remove_user_from_role", {
-		parameters: {
-			user_id: element.readAttribute("value"),
-			role_id: role_id
-		},
+RoleManager.prototype.removeUser = function(element) {
+  user_id = element.readAttribute("value");
+	new Ajax.Request("/admin/roles/"+role_id+"/users/"+user_id, {
+	  method: 'delete',
 		onCreate: function() {
 			spinners.show();
 		},
@@ -121,7 +117,9 @@ RoleManager.prototype.removeFromRole = function(element) {
 }
 
 RoleManager.prototype.loadData = function(role_id) {
-	new Ajax.Request('/admin/rbac/get_role_users/' + role_id, { 
+	new Ajax.Request('/admin/roles/'+role_id+'/users', { 
+	    method: 'get',
+	    contentType: 'application/javascript',
 			onCreate: function(){
 				spinners.show();
 			},
@@ -138,14 +136,14 @@ RoleManager.prototype.loadData = function(role_id) {
 					accept: "user",
 					hoverclass: "hover",
 					onDrop: function(element) {
-						manager.removeFromRole(element);
+						manager.removeUser(element);
 					} 
 				});
 				Droppables.add('taken_users', {
 					accept: "user",
 					hoverclass: "hover",
 					onDrop: function(element) {
-						manager.addToRole(element);
+						manager.addUser(element);
 					}
 				});
 				spinners.hide();

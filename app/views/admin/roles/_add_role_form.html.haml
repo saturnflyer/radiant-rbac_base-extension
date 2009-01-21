@@ -1,0 +1,4 @@
+= form_for :role, :url => admin_roles_path, :html => {:method => :put} do |form|
+  %p
+    %label= form.text_field :role_name
+    = submit_tag "Add Role"

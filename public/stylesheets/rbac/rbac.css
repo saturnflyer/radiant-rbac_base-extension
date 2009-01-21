@@ -6,7 +6,7 @@
 	#role_list li {
 		border-bottom: 1px solid #efefef;
 		margin: 0;
-		padding: 5px;
+		padding: 5px 5px 5px 25px;
 		position: relative;
 		line-height: 1.8;
 	}
@@ -46,5 +46,5 @@ ul.UserList {
 		line-height: 1.2em;
 		list-style: none;
 		margin: 0;
-		padding: 2px;
+		padding: 2px 2px 2px 25px;
 	}

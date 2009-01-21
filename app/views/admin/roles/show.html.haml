@@ -1,0 +1,19 @@
+- include_javascript 'rbac/admin/role_details'
+- include_stylesheet 'rbac/rbac'
+- include_javascript 'dragdrop'
+%h1= @role.role_name
+%script{:language => "javascript"}
+  = "var role_id = #{@role.id};"
+
+%h2
+  = @role.role_name
+  Users
+  = role_spinner 'taken'
+%ul#taken_users.UserList{:multiple => "multiple"}
+
+%h2
+  Available Users
+  = role_spinner 'available'
+%ul#available_users.UserList{:multiple => "multiple"}
+
+= link_to "RBAC Home", rbac_path()
