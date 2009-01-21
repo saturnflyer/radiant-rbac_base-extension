@@ -16,4 +16,13 @@ class Role < ActiveRecord::Base
       raise Role::ProtectedRoleError, "`#{self[:role_name]}' is a protected role and may not be removed."
     end
   end
+  
+  def remove_user(user)
+    if users.size <= 1 && allow_empty == false
+      return false
+    else
+      users.delete(user)
+      return true
+    end
+  end
 end

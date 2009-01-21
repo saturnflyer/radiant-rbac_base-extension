@@ -86,4 +86,26 @@ describe Admin::RolesController do
       end
     end
   end
+  describe 'DELETE remove_user' do
+    before do
+      @user = mock_model(User)
+      @role = mock_model(Role)
+      @role.stub!(:remove_user)
+      Role.stub!(:find).and_return(@role)
+      User.stub!(:find).and_return(@user)
+      
+    end
+    it "should find the role from the params" do
+      Role.should_receive(:find).with('1').and_return(@role)
+      delete :remove_user, :role_id => '1', :id => '2'
+    end
+    it "should find the user from the params" do
+      User.should_receive(:find).with('2').and_return(@user)
+      delete :remove_user, :role_id => '1', :id => '2'
+    end
+    it "should remove the user" do
+      @role.should_receive(:remove_user).and_return(true)
+      delete :remove_user, :role_id => '1', :id => '2'
+    end
+  end
 end

@@ -72,7 +72,7 @@ class Admin::RolesController < ApplicationController
     role = Role.find(params[:role_id])
     user = User.find(params[:id])
     
-    if role.users.delete(user)
+    if role.remove_user(user)
       render :json => {:status => "Ok", :role_id => role.id, :user_id => user.id }.to_json
     else
       render :json => {:status => "Error", :user_id => user.id }.to_json
