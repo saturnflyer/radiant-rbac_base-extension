@@ -11,7 +11,7 @@
       %li
         = link_to role.role_name, admin_role_path(role)
         = "(#{role.users.count})"
-        %span.remover= link_to image('remove', :alt => 'remove role'), admin_role_path(role), :confirm => "Are you sure?"
+        %span.remover= link_to image('remove', :alt => 'remove role'), admin_role_path(role), :confirm => "Are you sure?", :method => :delete
   - else
     %li.none No Roles yet created.
 = render :partial => 'add_role_form'
