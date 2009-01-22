@@ -20,7 +20,7 @@ class RbacBaseExtension < Radiant::Extension
   
   def activate
     if ActiveRecord::Base.connection.tables.include?('roles')
-      admin.tabs.add "Roles", "/admin/rbac", :after => "Layouts", :visibility => [:admin]
+      admin.tabs.add "Roles", "/admin/roles", :after => "Layouts", :visibility => [:admin]
       User.send :has_and_belongs_to_many, :roles
       User.send :include, RbacSupport
       admin.user.edit[:form].delete('edit_roles')
