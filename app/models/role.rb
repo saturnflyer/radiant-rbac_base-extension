@@ -12,7 +12,6 @@ class Role < ActiveRecord::Base
   
   def verify_non_standard
     if RADIANT_STANDARDS.include?(self[:role_name].to_s)
-      # self.errors.add :role_name, "is a protected role and may not be removed."
       raise Role::ProtectedRoleError, "`#{self[:role_name]}' is a protected role and may not be removed."
     end
   end
