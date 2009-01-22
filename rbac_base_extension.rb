@@ -25,6 +25,9 @@ class RbacBaseExtension < Radiant::Extension
       User.send :include, RbacSupport
       admin.user.edit[:form].delete('edit_roles')
     end
+    Admin::UserController.class_eval {
+      helper Admin::AlterationsHelper
+    }
   end
   
   def deactivate
