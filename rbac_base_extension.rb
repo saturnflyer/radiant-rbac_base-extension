@@ -2,7 +2,7 @@
 require_dependency 'application'
 
 class RbacBaseExtension < Radiant::Extension
-  version "1.1"
+  version "1.2"
   description "Allows other extensions to control access managed by the roles created here. Administrators may add and remove users from roles as needed without regard to the standard Radiant roles."
   url "http://www.saturnflyer.com/"
   
