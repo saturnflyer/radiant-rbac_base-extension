@@ -72,4 +72,11 @@ describe Role do
     end
   end
   
+  describe "standard?" do
+    it "should return true if the role's downcased role_name is in the Radiant standard roles" do
+      @role = Role.new(:role_name => 'admin')
+      @role.standard?.should be_true
+    end
+  end
+  
 end

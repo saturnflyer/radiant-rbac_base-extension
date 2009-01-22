@@ -24,4 +24,8 @@ class Role < ActiveRecord::Base
       return true
     end
   end
+  
+  def standard?
+    RADIANT_STANDARDS.include?(role_name.downcase)
+  end
 end

@@ -5,7 +5,8 @@ describe 'index' do
     template.should_receive(:include_stylesheet).with('rbac/rbac')
     @users = []
     @users.stub!(:count)
-    @roles = [mock_model(Role,:role_name => 'Test', :users => @users)]
+    @role = mock_model(Role,:role_name => 'Test', :users => @users, :standard? => false)
+    @roles = [@role]
     assigns[:roles] = @roles
   end
   it "should provide a link to edit each role" do
