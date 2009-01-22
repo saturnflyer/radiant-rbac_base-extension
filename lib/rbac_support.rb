@@ -10,6 +10,9 @@ module RbacSupport
           @my_roles["#{role.role_name.underscore}"] = true
         end
       end
+      if Radiant::Config['roles.admin.sees_everything'] == 'true' && possible_role.role_name.downcase != 'admin'
+        return true if admin?
+      end
       @my_roles["#{possible_role.role_name.underscore}"] #|| self[:admin] == true
     end
   end
