@@ -2,13 +2,11 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Admin::RolesController do
   before do
+    @current_user = mock_model(User)
     controller.stub!(:current_user).and_return(mock_model(User))
+    controller.current_user.stub!(:admin?).and_return(true)
   end
   describe 'GET index' do
-    before do
-      @user = mock_model(User)
-      controller.stub!(:current_user).and_return(@user)
-    end
     it "should assign all roles as @roles" do
       @roles = []
       Role.should_receive(:find).with(:all).and_return(@roles)
@@ -63,7 +61,7 @@ describe Admin::RolesController do
   end  
   describe 'DELETE destroy' do
     before do
-      @role = mock_model(Role)
+      @role = mock_model(Role, :role_name => 'Test')
       @role.stub!(:destroy)
       Role.stub!(:find).and_return(@role)
     end
@@ -82,6 +80,21 @@ describe Admin::RolesController do
     describe "with invalid params" do
       it "should redirect to the roles index" do
         Role.should_receive(:find).with('1').and_raise(ActiveRecord::RecordNotFound.new(@role))
+        delete :destroy, :id => '1'
+        response.should redirect_to(admin_roles_path)
+      end
+    end
+    describe "for a standard Radiant role" do
+      before do
+        @role = mock_model(Role, :role_name => Role::RADIANT_STANDARDS.first)
+        Role.stub!(:find).and_return(@role)
+      end
+      it "should redirect to the roles index" do
+        delete :destroy, :id => '1'
+        response.should redirect_to(admin_roles_path)
+      end
+      it "should not delete the role" do
+        @role.should_not_receive(:destroy)
         delete :destroy, :id => '1'
       end
     end

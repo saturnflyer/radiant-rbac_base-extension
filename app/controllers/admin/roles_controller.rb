@@ -33,7 +33,7 @@ class Admin::RolesController < ApplicationController
   
   def destroy
     @role = Role.find(params[:id])
-    @role.destroy
+    @role.destroy unless Role::RADIANT_STANDARDS.include?(@role.role_name)
     redirect_to admin_roles_path()
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'The specified Role could not be found.'
