@@ -1,5 +1,6 @@
 class SetupStandardRoles < ActiveRecord::Migration
   def self.up
+    User.send :has_and_belongs_to_many, :roles
     self.setup_admins
     self.setup_developers
   end
