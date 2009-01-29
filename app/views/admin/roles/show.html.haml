@@ -1,13 +1,12 @@
 - include_javascript 'rbac/admin/role_details'
 - include_stylesheet 'rbac/rbac'
 - include_javascript 'dragdrop'
-%h1= @role.role_name
+%h1= "Role: #{@role.role_name}"
 %script{:language => "javascript"}
   = "var role_id = #{@role.id};"
-
+%p Drag and drop users between the lists below to add or remove them from this role.
 %h2
-  = @role.role_name
-  Users
+  Active Users
   = role_spinner 'taken'
 %ul#taken_users.UserList{:multiple => "multiple"}
 
@@ -16,4 +15,19 @@
   = role_spinner 'available'
 %ul#available_users.UserList{:multiple => "multiple"}
 
-= link_to "RBAC Home", rbac_path()
+%h3 Edit Details
+- form_for @role, :url => admin_role_path(@role) do |f|
+  %p
+    = f.label :description
+    = f.text_field :description
+  %p
+    = f.check_box :allow_empty
+    = f.label :allow_empty, "Allow this role to have no users."
+  %p
+    = f.submit
+%p 
+  %strong Caution:
+  Roles are defined as a security mechanism for the extensions that are restricted by user role. User roles are normally added by these extensions at installation time. Removing roles may cause problems with the role based security.  
+  %strong Only use this feature if you absolutely must.
+
+= link_to "Role Management Home", admin_roles_path()

@@ -19,7 +19,12 @@ class Admin::RolesController < ApplicationController
     
   end
   def update
-    
+    @role = Role.find(params[:id])
+    if @role.update_attributes(params[:role])
+      redirect_to admin_role_path(@role)
+    else
+      render :action => 'show'
+    end
   end
   
   def create

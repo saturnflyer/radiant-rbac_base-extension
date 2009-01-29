@@ -5,7 +5,7 @@ describe 'index' do
     template.should_receive(:include_stylesheet).with('rbac/rbac')
     @users = []
     @users.stub!(:count)
-    @role = mock_model(Role,:role_name => 'Test', :users => @users, :standard? => false)
+    @role = mock_model(Role,:role_name => 'Test', :description => 'The test role.', :users => @users, :standard? => false)
     @roles = [@role]
     assigns[:roles] = @roles
   end

@@ -121,4 +121,24 @@ describe Admin::RolesController do
       delete :remove_user, :role_id => '1', :id => '2'
     end
   end
+  describe 'PUT update' do
+    before do
+      @role = mock_model(Role)
+      @role.stub!(:update_attributes).and_return(true)
+      Role.stub!(:find).and_return(@role)
+    end
+    it "should find the role from the params" do
+      Role.should_receive(:find).with('1').and_return(@role)
+      put :update, :id => '1'
+    end
+    it "should update the role's attributes from the params" do
+      role_params = {'this' => 'that'}
+      @role.should_receive(:update_attributes).with(role_params).and_return(true)
+      put :update, :id => '1', :role => role_params
+    end
+    it "should redirect to the role's page" do
+      put :update, :id => '1'
+      response.should redirect_to(admin_role_path(@role))
+    end
+  end
 end

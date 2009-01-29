@@ -1,16 +1,15 @@
 %h1 Role Management
 %p Use this screen to manage your user roles.
-%p 
-  %strong Caution:
-  Roles are defined as a security mechanism for the extensions that are restricted by user role. User roles are normally added by these extensions at installation time. Adding or removing roles may cause problems with the role based security.  
-  %strong Only use this feature if you absolutely must.
 %h2 Roles
 %ul#role_list
   - unless @roles.blank?
     - @roles.each do |role|
       %li
-        = link_to role.role_name, admin_role_path(role)
-        = "(#{role.users.count})"
+        %span.role
+          = link_to role.role_name, admin_role_path(role)
+          = "(#{role.users.count})"
+        %span.description
+          %em= role.description
         - unless role.standard?
           %span.remover= link_to image('remove', :alt => 'remove role'), admin_role_path(role), :confirm => "Are you sure?", :method => :delete
   - else

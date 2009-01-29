@@ -1,6 +1,8 @@
 class Role < ActiveRecord::Base
   has_and_belongs_to_many :users
   validates_uniqueness_of :role_name
+  belongs_to :created_by, :class_name => 'User'
+  belongs_to :updated_by, :class_name => 'User'
   
   order_by :role_name
   
