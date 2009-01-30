@@ -5,7 +5,6 @@ class AddUserInfo < ActiveRecord::Migration
   end
   def self.down
     remove_column :roles, :updated_by_id
-    remove_column :roles, :created_by_id
-    
+    remove_column :roles, :created_by_id    
   end
 end

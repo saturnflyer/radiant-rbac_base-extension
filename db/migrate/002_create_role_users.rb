@@ -9,8 +9,8 @@ class CreateRoleUsers < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :roles_users
-    remove_index :roles_users, :role_id
     remove_index :roles_users, :user_id
+    remove_index :roles_users, :role_id
+    drop_table :roles_users
   end
 end
