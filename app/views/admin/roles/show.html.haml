@@ -4,7 +4,7 @@
 %h1= "Role: #{@role.role_name}"
 %script{:language => "javascript"}
   = "var role_id = #{@role.id};"
-%p Drag and drop users between the lists below to add or remove them from this role.
+%p Drag and drop users between the lists below to add or remove them from this role. The changes that you make will take effect immediately.
 %h2
   Active Users
   = role_spinner 'taken'
@@ -15,7 +15,7 @@
   = role_spinner 'available'
 %ul#available_users.UserList{:multiple => "multiple"}
 
-%h3 Edit Details
+%h3 Edit Role Details
 .form-area
   - form_for @role, :url => admin_role_path(@role) do |f|
     %p.title
@@ -26,5 +26,5 @@
       = f.label :allow_empty, "Allow this role to have no users."
     %p
       = f.submit
-
-= link_to "Role Management Home", admin_roles_path()
+      or
+      = link_to "Cancel", admin_roles_path()
