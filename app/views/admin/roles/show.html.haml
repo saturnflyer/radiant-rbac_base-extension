@@ -16,18 +16,15 @@
 %ul#available_users.UserList{:multiple => "multiple"}
 
 %h3 Edit Details
-- form_for @role, :url => admin_role_path(@role) do |f|
-  %p
-    = f.label :description
-    = f.text_field :description
-  %p
-    = f.check_box :allow_empty
-    = f.label :allow_empty, "Allow this role to have no users."
-  %p
-    = f.submit
-%p 
-  %strong Caution:
-  Roles are defined as a security mechanism for the extensions that are restricted by user role. User roles are normally added by these extensions at installation time. Removing roles may cause problems with the role based security.  
-  %strong Only use this feature if you absolutely must.
+.form-area
+  - form_for @role, :url => admin_role_path(@role) do |f|
+    %p.title
+      = f.label :description
+      = f.text_field :description, :class => 'textbox'
+    %p
+      = f.check_box :allow_empty
+      = f.label :allow_empty, "Allow this role to have no users."
+    %p
+      = f.submit
 
 = link_to "Role Management Home", admin_roles_path()
