@@ -19,10 +19,8 @@ class RbacBaseExtension < Radiant::Extension
   end
   
   def activate
-    if ActiveRecord::Base.connection.tables.include?('config')
-      Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
-    end
-    if ActiveRecord::Base.connection.tables.include?('roles')
+    Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
+    if Role.table_exists?
       admin.tabs.add "Roles", "/admin/roles", :after => "Layouts", :visibility => [:admin]
       User.send :has_and_belongs_to_many, :roles
       User.send :include, RbacSupport
