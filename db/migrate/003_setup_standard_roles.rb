@@ -8,7 +8,7 @@ class SetupStandardRoles < ActiveRecord::Migration
     say("Removing all Roles.")
     Role.find(:all, :conditions => ["role_name = 'Admin' OR role_name = 'Developer'"]).map(&:destroy)
   end
-  
+
   def self.setup_admins
     admin_users = User.find_all_by_admin(true)
     admin_role = Role.create!(:role_name => 'Admin')
@@ -17,13 +17,13 @@ class SetupStandardRoles < ActiveRecord::Migration
       user.roles << admin_role
     end
   end
-  
+
   def self.setup_developers
     developer_users = User.find_all_by_developer(true)
     developer_role = Role.create!(:role_name => 'Developer')
     developer_users.each do |user|
       say("Adding #{user.login} to the #{developer_role.role_name} role.")
-      user.roles << developer_users
+      user.roles << developer_role
     end
   end
 end
