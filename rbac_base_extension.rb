@@ -21,8 +21,9 @@ class RbacBaseExtension < Radiant::Extension
   def activate
     Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
     if Role.table_exists?
-      admin.nav['settings'] << admin.nav_item(:roles, 'Roles', '/admin/roles')
-      # admin.tabs.add "Roles", "/admin/roles", :after => "Layouts", :visibility => [:admin]
+      tab 'Settings' do
+        add_item('Roles', '/admin/roles')
+      end
       User.send :has_and_belongs_to_many, :roles
       User.send :include, RbacSupport
       admin.users.edit[:form].delete('edit_roles')
@@ -34,7 +35,6 @@ class RbacBaseExtension < Radiant::Extension
   end
   
   def deactivate
-    admin.tabs.remove "Roles"
   end
   
 end

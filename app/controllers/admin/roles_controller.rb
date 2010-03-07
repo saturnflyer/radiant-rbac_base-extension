@@ -6,6 +6,7 @@ class Admin::RolesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:users, :remove_user, :add_user]
   def index
     @roles = Role.find(:all)
+    @role = Role.new
   end
   
   def show
