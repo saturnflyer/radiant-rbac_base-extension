@@ -21,8 +21,8 @@
       = f.label :description
       = f.text_field :description, :class => 'textbox'
     %p
-      = f.check_box :allow_empty
-      = f.label :allow_empty, "Allow this role to have no users."
+      = f.check_box :allow_empty, :class => 'checkbox'
+      = f.label :allow_empty, "Allow this role to have no users.", :class => 'checkbox'
     %p
       = f.submit
       or
