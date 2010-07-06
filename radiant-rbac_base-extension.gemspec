@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{radiant-rbac_base-extension}
-  s.version = "1.3.0"
+  s.version = "1.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jim Gay"]
@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
      "lib/tasks/rbac_base_extension_tasks.rake",
      "public/javascripts/rbac/admin/role_details.js",
      "public/stylesheets/rbac/rbac.css",
+     "radiant-rbac_base-extension.gemspec",
      "rbac_base_extension.rb",
      "spec/controllers/admin/roles_controller_spec.rb",
      "spec/controllers/admin/roles_routing_spec.rb",
