@@ -6,13 +6,11 @@
 %script{:language => "javascript"}
   = "var role_id = #{@role.id};"
 %p Drag and drop users between the lists below to add or remove them from this role. The changes that you make will take effect immediately.
-%h2
-  Active Users
+%h2 Active Users
 %ul#taken_users.UserList{:multiple => "multiple"}
   %li#busy_taken.rbac_busy_marker= role_spinner 'taken'
 
-%h2
-  Available Users
+%h2 Available Users
 %ul#available_users.UserList{:multiple => "multiple"}
   %li#busy_available.rbac_busy_marker= role_spinner 'available'
 
