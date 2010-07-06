@@ -1,50 +1,20 @@
-#role_list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-	#role_list li {
-		border-bottom: 1px solid #efefef;
-		margin: 0;
-		padding: 5px 5px 5px 25px;
-		position: relative;
-		line-height: 1.8;
-	}
-	#role_list li.none {
-		background: #eee;
-		color: #999;
-	}
-		#role_list li a {
-			border: 1px solid transparent;
-			padding: 3px;
-			text-decoration: none;
-		}
-		#role_list li a:hover {
-			border-color: black;
-			color: black;
-		}
-		#role_list li span.remover {
-			display: block;
-			position: absolute;
-			top: 5px;
-			right: 5px;
-		}
-			#role_list li span.remover a, #role_list li span.remover a:hover {
-				background: #fff;
-			}
-ul.UserList {
-	background: #eee;
+.UserList {
+	background: #fff;
+	color: #000;
 	list-style: none;
 	margin: 0 0 1em;
 	min-height: 1em;
 	padding: 10px 0;
 }
-	ul.UserList.hover {
+	.UserList.hover {
 		background: #efe;
 	}
-	ul.UserList li {
+	.UserList li {
 		line-height: 1.2em;
 		list-style: none;
 		margin: 0;
 		padding: 2px 2px 2px 25px;
+	}
+	.rbac_busy_marker {
+	  position: absolute;
 	}
