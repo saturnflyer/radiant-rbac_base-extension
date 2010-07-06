@@ -2,11 +2,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "radiant-rbac_base-extension"
-    gem.summary = %Q{Rbac Base Extension for Radiant CMS}
+    gem.summary = %Q{RBAC Base Extension for Radiant CMS}
     gem.description = %Q{Flexible user role management for Radiant.}
     gem.email = "jim@saturnflyer.com"
     gem.homepage = "http://github.com/saturnflyer/radiant-rbac_base-extension"
     gem.authors = ["Jim Gay"]
+    gem.add_dependency 'radiant', '>= 0.9'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
