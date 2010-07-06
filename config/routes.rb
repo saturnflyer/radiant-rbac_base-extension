@@ -5,7 +5,4 @@ ActionController::Routing::Routes.draw do |map|
     admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'add_user', :conditions => {:method => :post}
     admin.role_users '/roles/:role_id/users', :controller => 'roles', :action => 'users', :conditions => {:method => :get}
   end
-  #legacy paths
-  map.rbac 'admin/rbac', :controller => 'admin/roles', :action => 'index'
-  map.role_details 'admin/roles/:id', :controller => 'admin/roles', :action => 'show'
 end
