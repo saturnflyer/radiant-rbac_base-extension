@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
 describe 'show' do
+  let(:role){mock_model(Role,:role_name => 'Test', :description => 'The test role.', :allow_empty => true)}
   before do
     template.should_receive(:include_stylesheet).with('rbac/rbac')
     template.stub!(:include_javascript)
-    @role = mock_model(Role,:role_name => 'Test', :description => 'The test role.')
-    assigns[:role] = @role
+    assigns[:role] = role
   end
   it "should display the role name" do
     render 'admin/roles/show'
