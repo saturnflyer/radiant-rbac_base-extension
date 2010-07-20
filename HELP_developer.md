@@ -12,7 +12,10 @@ to return a boolean value based on the user being in that role.
 By setting `allow_empty` to `false`, the role management interface will
 not allow the last user to be removed from your role.
 
-Once you have the role you need, you can even set the visibility of any
-tabs that you create in your extension with your new role:
+Once you have the role you need, you can set the visibility of any
+controllers that you create in your extension with your new role:
 
-    admin.tabs.add "Finance", "/admin/finance", :after => "Pages", :visibility => [:finance]
+      only_allow_access_to :index, :show, :new, :create, :edit, :update, :remove, :destroy,
+        :when => [:designer, :admin],
+        :denied_url => { :controller => 'admin/pages', :action => 'index' },
+        :denied_message => 'You must have designer privileges to perform this action.'
