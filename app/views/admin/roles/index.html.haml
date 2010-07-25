@@ -5,19 +5,26 @@
   Roles are defined as a security mechanism for the extensions that are restricted by user role. User roles are normally added by these extensions at installation time. Removing roles may cause problems with the role based security.  
   %strong Only remove roles if you absolutely must.
 %h2 Roles
-%ul#role_list
-  - unless @roles.blank?
-    - @roles.each do |role|
-      %li
-        %span.role
-          = link_to role.role_name, admin_role_path(role)
-          = "(#{role.users.count})"
-        %span.description
-          %em= role.description
-        - unless role.standard?
-          %span.remover= link_to image('remove', :alt => 'remove role'), admin_role_path(role), :confirm => "Are you sure?", :method => :delete
-  - else
-    %li.none No Roles yet created.
+%table.index
+  %thead
+    %tr
+      %th Role
+      %th # Users
+      %th Description
+      %th Modify
+  %tbody
+    - unless @roles.blank?
+      - @roles.each do |role|
+        %tr
+          %td= link_to role.role_name, admin_role_path(role)
+          %td= role.users.count
+          %td= role.description
+          %td.remove
+            - unless role.standard?
+              = link_to 'Remove', admin_role_path(role), :confirm => "Are you sure?", :method => :delete
+    - else
+      %tr
+        %td{ :colspan => 4} No Roles yet created.
 #actions
   = render :partial => 'add_role_form'
 - include_stylesheet 'rbac/rbac'

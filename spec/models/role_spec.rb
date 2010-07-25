@@ -6,7 +6,7 @@ describe Role do
     Role.new.save!
     lambda {
       Role.new.save!
-    }.should raise_error(ActiveRecord::RecordInvalid, /has already been taken/)
+    }.should raise_error(ActiveRecord::RecordInvalid, /is already in use/)
   end
   
   it "should not err when saved with a standard Radiant Role name" do
@@ -14,8 +14,8 @@ describe Role do
   end
   
   describe 'Role::RADIANT_STANDARDS' do
-    it "should be an array of 'admin' and 'developer'" do
-      Role::RADIANT_STANDARDS.should == ['admin','developer']
+    it "should be an array of 'admin' and 'designer'" do
+      Role::RADIANT_STANDARDS.should == ['admin','designer']
     end
   end
   

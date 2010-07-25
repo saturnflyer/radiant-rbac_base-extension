@@ -1,19 +1,18 @@
-- include_stylesheet 'rbac/rbac'
 - include_javascript 'admin/dragdrop'
 - include_javascript 'rbac/admin/role_details'
-%h1= "Role: #{@role.role_name}"
+- include_stylesheet 'rbac/rbac'
+- @body_classes ||= [].tap{|a| a << 'reversed'}
+%h1= @role.role_name
 %script{:language => "javascript"}
   = "var role_id = #{@role.id};"
 %p Drag and drop users between the lists below to add or remove them from this role. The changes that you make will take effect immediately.
-%h2
-  Active Users
-  = role_spinner 'taken'
+%h2 Active Users
 %ul#taken_users.UserList{:multiple => "multiple"}
+  %li#busy_taken.rbac_busy_marker= role_spinner 'taken'
 
-%h2
-  Available Users
-  = role_spinner 'available'
+%h2 Available Users
 %ul#available_users.UserList{:multiple => "multiple"}
+  %li#busy_available.rbac_busy_marker= role_spinner 'available'
 
 %h3 Edit Role Details
 .form-area
@@ -22,8 +21,8 @@
       = f.label :description
       = f.text_field :description, :class => 'textbox'
     %p
-      = f.check_box :allow_empty
-      = f.label :allow_empty, "Allow this role to have no users."
+      = f.check_box :allow_empty, :class => 'checkbox'
+      = f.label :allow_empty, "Allow this role to have no users.", :class => 'checkbox'
     %p
       = f.submit
       or

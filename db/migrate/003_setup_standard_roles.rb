@@ -2,11 +2,11 @@ class SetupStandardRoles < ActiveRecord::Migration
   def self.up
     User.send :has_and_belongs_to_many, :roles
     self.setup_admins
-    self.setup_developers
+    self.setup_designers
   end
   def self.down
     say("Removing all Roles.")
-    Role.find(:all, :conditions => ["role_name = 'Admin' OR role_name = 'Developer'"]).map(&:destroy)
+    Role.find(:all, :conditions => ["role_name = ? OR role_name = ?",'Admin','Designer']).map(&:destroy)
   end
 
   def self.setup_admins
@@ -17,8 +17,8 @@ class SetupStandardRoles < ActiveRecord::Migration
       user.roles << admin_role
     end
   end
-
-  def self.setup_developers
+  
+  def self.setup_designers
     designer_users = User.find_all_by_designer(true)
     designer_role = Role.create!(:role_name => 'Designer')
     designer_users.each do |user|
