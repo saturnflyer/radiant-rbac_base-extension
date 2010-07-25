@@ -6,18 +6,6 @@ class RbacBaseExtension < Radiant::Extension
   description "Allows other extensions to control access managed by the roles created here. Administrators may add and remove users from roles as needed without regard to the standard Radiant roles."
   url "http://www.saturnflyer.com/"
   
-  define_routes do |map|
-    map.namespace :admin do |admin|
-      admin.resources :roles#, :member => {:users => :get, :remove_user => :delete, :add_user => :post}
-      admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'remove_user', :conditions => {:method => :delete}
-      admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'add_user', :conditions => {:method => :post}
-      admin.role_users '/roles/:role_id/users', :controller => 'roles', :action => 'users', :conditions => {:method => :get}
-    end
-    #legacy paths
-    map.rbac 'admin/rbac', :controller => 'admin/roles', :action => 'index'
-    map.role_details 'admin/roles/:id', :controller => 'admin/roles', :action => 'show'
-  end
-  
   def activate
     Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
     if Role.table_exists?
