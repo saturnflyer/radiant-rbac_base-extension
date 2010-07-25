@@ -12,6 +12,8 @@ class Role < ActiveRecord::Base
   
   RADIANT_STANDARDS = ['admin', 'developer']
   
+  alias_method :name, :role_name
+  
   def verify_non_standard
     if RADIANT_STANDARDS.include?(self[:role_name].to_s)
       raise Role::ProtectedRoleError, "`#{self[:role_name]}' is a protected role and may not be removed."
