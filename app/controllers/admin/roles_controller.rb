@@ -10,11 +10,11 @@ class Admin::RolesController < ApplicationController
   end
   
   def show
-    @role = Role.find(params[:id])
+    redirect_to edit_admin_role_path(params[:id])
   end
   
   def edit
-    
+    @role = Role.find(params[:id])
   end
   def new
     

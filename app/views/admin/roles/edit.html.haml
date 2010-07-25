@@ -1,6 +1,6 @@
-- include_javascript 'rbac/admin/role_details'
 - include_stylesheet 'rbac/rbac'
-- include_javascript 'dragdrop'
+- include_javascript 'admin/dragdrop'
+- include_javascript 'rbac/admin/role_details'
 %h1= "Role: #{@role.role_name}"
 %script{:language => "javascript"}
   = "var role_id = #{@role.id};"
