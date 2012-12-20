@@ -1,0 +1,9 @@
+---
+nl:
+  rbac base: Rbac Base
+  rbac_base:
+    active_users: Actieve Gebruikers
+    allow_this_role_to_have_no_users: Laat toe dat er geen gebruikers zijn met deze rol.
+    available_users: Beschikbare Gebruikers
+    drag_and_drop_users: Versleep gebruikers tussen de lijsten hier onder om ze deze rol te geven of ontnemen. De aanpassingen gebeuren onmiddelijk.
+    edit_role_details: Deze rol aanpassen
