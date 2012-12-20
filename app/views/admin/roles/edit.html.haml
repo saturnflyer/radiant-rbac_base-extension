@@ -5,25 +5,25 @@
 %h1= @role.role_name
 %script{:language => "javascript"}
   = "var role_id = #{@role.id};"
-%p Drag and drop users between the lists below to add or remove them from this role. The changes that you make will take effect immediately.
-%h2 Active Users
+%p= t('rbac_base.drag_and_drop_users')
+%h2= t('rbac_base.active_users')
 %ul#taken_users.UserList{:multiple => "multiple"}
   %li#busy_taken.rbac_busy_marker= role_spinner 'taken'
 
-%h2 Available Users
+%h2= t('rbac_base.available_users')
 %ul#available_users.UserList{:multiple => "multiple"}
   %li#busy_available.rbac_busy_marker= role_spinner 'available'
 
-%h3 Edit Role Details
+%h3= t('rbac_base.edit_role_details')
 .form-area
   - form_for @role, :url => admin_role_path(@role) do |f|
     %p.title
-      = f.label :description
+      = f.label :description, t('description')
       = f.text_field :description, :class => 'textbox'
     %p
       = f.check_box :allow_empty, :class => 'checkbox'
-      = f.label :allow_empty, "Allow this role to have no users.", :class => 'checkbox'
+      = f.label :allow_empty, t("rbac_base.allow_this_role_to_have_no_users"), :class => 'checkbox'
     %p
-      = f.submit
-      or
-      = link_to "Cancel", admin_roles_path()
+      = save_model_button(@role)
+      = t('or')
+      = link_to t('cancel'), admin_roles_path()

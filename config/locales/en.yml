@@ -1,3 +1,10 @@
 ---
 en:
   rbac base: Rbac Base
+  rbac_base:
+    active_users: Active Users
+    allow_this_role_to_have_no_users: Allow this role to have no users.
+    available_users: Available Users
+    drag_and_drop_users: Drag and drop users between the lists below to add or remove them from this role. The changes that you make will take effect immediately.
+    edit_role_details: Edit Role Details
+  

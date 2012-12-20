@@ -1,4 +1,3 @@
 - form_for @role, :url => admin_roles_path do |form|
-  %p
-    = form.text_field :role_name
-    = save_model_button(@role)
+  = form.text_field :role_name, :placeholder => t('name'), :value => ''
+  = save_model_button(@role)
