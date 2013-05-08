@@ -1,11 +1,12 @@
 # Uncomment this if you reference any of your controllers in activate
-require_dependency 'application_controller'
+# require_dependency "application_controller"
+require "radiant-rbac_base-extension"
 
 class RbacBaseExtension < Radiant::Extension
-  version "#{File.read(File.expand_path(File.dirname(__FILE__)) + '/VERSION')}"
-  description "Allows other extensions to control access managed by the roles created here. Administrators may add and remove users from roles as needed without regard to the standard Radiant roles."
-  url "http://www.saturnflyer.com/"
-  
+  version     RadiantRbacBaseExtension::VERSION
+  description RadiantRbacBaseExtension::DESCRIPTION
+  url         RadiantRbacBaseExtension::URL
+
   def activate
     Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
     if Role.table_exists?
@@ -21,8 +22,4 @@ class RbacBaseExtension < Radiant::Extension
       helper Admin::AlterationsHelper
     }
   end
-  
-  def deactivate
-  end
-  
 end
