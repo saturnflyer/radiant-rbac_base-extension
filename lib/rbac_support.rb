@@ -1,4 +1,7 @@
 module RbacSupport
+  def self.admin_is_omniscient?
+    @admin_is_omniscient ||= (Radiant::Config['roles.admin.sees_everything'] == 'true')
+  end
   
   all_roles = Role.find(:all)
   
@@ -10,7 +13,7 @@ module RbacSupport
           @my_roles["#{role.role_name.underscore}"] = true
         end
       end
-      if Radiant::Config['roles.admin.sees_everything'] == 'true' && possible_role.role_name.downcase != 'admin'
+      if RbacSupport.admin_is_omniscient? && possible_role.role_name.downcase != 'admin'
         return true if admin?
       end
       @my_roles["#{possible_role.role_name.underscore}"] #|| self[:admin] == true
